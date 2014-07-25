@@ -1,0 +1,9 @@
+Visualizer:
+VS 2013 buid-in: DataSetVisualizer, WpfVisualizer
+Expression Tree Visualizer:
+Source: http://exprtreevisualizer.codeplex.com/ 
+replace reference C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\ReferenceAssemblies\v2.0\Microsoft.VisualStudio.DebuggerVisualizers.dll
+Build in 2013 copy dll to document/vs2013/visualizer
+
+VS 2008 has a more detail visualizer but would not work in VS2010/2013
+source: Visual Studio sample, Search "Expression Tree Visualizer Sample"

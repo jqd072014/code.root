@@ -6,8 +6,19 @@ using System.ComponentModel;
 
 namespace Trading.ViewModel
 {
-    public class _5_10YRViewModel : INotifyPropertyChanged
+    public class _5_10YRViewModel : ViewModelBase
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        string _cusip;
+        public string Cusip
+        {
+            get
+            {
+                return _cusip;
+            }
+            set
+            {
+                SetProperty(ref _cusip, value, () => Cusip);
+            }
+        }
     }
 }

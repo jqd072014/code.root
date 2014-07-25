@@ -17,7 +17,7 @@ namespace Trading
 
     public interface IAdapter
     {
-        Action<IFieldDataSet, INotifyPropertyChanged> updater { get; set; }
+        Action<IFieldDataSet, INotifyPropertyChanged> updater { get;  }
     }
 
     public interface IViewModelController

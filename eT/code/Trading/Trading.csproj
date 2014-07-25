@@ -69,6 +69,8 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapter\Map.cs" />
+    <Compile Include="Adapter\TradingAdapter.cs" />
     <Compile Include="DockingViewManager.cs" />
     <Compile Include="FluentFactory.cs" />
     <Compile Include="Interface.cs" />

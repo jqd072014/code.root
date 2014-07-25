@@ -17,6 +17,7 @@ using System.Reactive.Subjects;
 using System.Windows.Threading;
 using System.Diagnostics;
 using Trading.Transport;
+using Trading.Adapter;
 
 namespace Modules
 {
@@ -30,25 +31,15 @@ namespace Modules
         public void Initialize()
         {
             _container.RegisterInstance<ITransport>(new TradingTransport());
-            _container.RegisterInstance<IAdapter>(CreateAdapter());
+            _container.RegisterInstance<IAdapter>(new TradingAdapter());
             _container.RegisterInstance<IScheduler>(new NewThreadScheduler());
             _container.RegisterInstance<LocalScheduler>(DispatcherScheduler.Current);
         }
-
-        TradingAdapter CreateAdapter()
-        {
-            TradingAdapter a = new TradingAdapter();
-            a.updater = (fs,vm) => { Debug.WriteLine("updater "+DateTime.Now) ; };
-            return a;
-        }
     }
 
 
 
 
-    public class TradingAdapter : IAdapter
-    {
-        public Action<IFieldDataSet, INotifyPropertyChanged> updater { get; set; }
-    }
+
 }
 

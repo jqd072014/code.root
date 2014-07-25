@@ -39,8 +39,5 @@ namespace Trading.ViewModel
         public bool? IsReference { get; set; }
         public double? OrderSize { get; set; }
         public double? OrderPrice { get; set; }
-
-
-
     }
 }

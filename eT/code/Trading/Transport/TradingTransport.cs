@@ -12,7 +12,7 @@ namespace Trading.Transport
         {
             return Observable.Create<IFieldDataSet>((obsr) =>
             {
-                return Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(5)).Select(i => new FieldDataSet()).Subscribe(obsr);
+                return Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(1)).Select(i => new FieldDataSet()).Subscribe(obsr);
             });
         }
     }

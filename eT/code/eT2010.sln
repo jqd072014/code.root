@@ -12,6 +12,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trading", "Trading\Trading.csproj", "{2262A0E6-AD66-40AE-A11F-C41343CFDAAC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EE901AC3-CB8C-4B43-9669-E8FFEB2AA658}"
+	ProjectSection(SolutionItems) = preProject
+		JIRA.txt = JIRA.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

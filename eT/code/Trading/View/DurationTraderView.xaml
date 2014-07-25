@@ -6,6 +6,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <TextBlock>Duration Trader</TextBlock>    
+        <StackPanel>
+        <TextBlock>Duration Trader</TextBlock>
+        <TextBlock Text="{Binding Cusip}" />
+        </StackPanel>
     </Grid>
 </UserControl>

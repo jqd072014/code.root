@@ -17,3 +17,4 @@ Solution active Config JPMConfig and Active Platform x64, will set project level
 Can still do some project level twick.
 Some combination of Platform may be fail, e.g Solution x86/Project row=x86, while project properties platform= X64.
 Could be just directories test/x64 /x86 not line up correctly but not really sure
+   

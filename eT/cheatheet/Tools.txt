@@ -24,4 +24,15 @@ c:\Users\jimmy\_netrc
 machine github.com
 login jqd072014
 password ********
+
+VSPackage
+==========
+Tools=>Extension Manager=> search "VSPackage", nothing but tell you to donwload
+Download VS2010 SP1 SDK. after install "Add-In project template is removed" (Deprecated)
+Not really need to Downlaod VSPackage Builde, but keep an eye on it.
+
+Clean up VSPackage
+C:\Users\Jimmy\AppData\Local\Microsoft\VisualStudio\10.0Exp\Extensions\Company
+regedit search "VSPackage1"
+DTE ==Development Tool Extensibility
    

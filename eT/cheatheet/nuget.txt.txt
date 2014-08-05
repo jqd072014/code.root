@@ -15,3 +15,4 @@ install-package Rx-main -projectName Modules
 
 Temcity need to run Nuget.exe to update packages
 Nuget CommandLine Bootstrapper---https://nuget.codeplex.com/releases/view/58939
+Nuget.exe install .eT\eT\code\Shell\packages.config -OutputDirectory .eT\eT\code\packages

@@ -12,3 +12,6 @@ Install-Package AvalonDock -Version 2.0.2000 -projectName Shell
 
 
 install-package Rx-main -projectName Modules
+
+Temcity need to run Nuget.exe to update packages
+Nuget CommandLine Bootstrapper---https://nuget.codeplex.com/releases/view/58939

@@ -1,7 +1,7 @@
 nuget.exe config
-Nuget.exe install .\Shell\packages.config
-Nuget.exe install .\Trading\packages.config
-Nuget.exe install .\Modules\packages.config
-Nuget.exe install .\DataGridWithColumnStyle\packages.config
-Nuget.exe install .\p1\packages.config
+Nuget.exe install .eT\eT\code\Shell\packages.config
+Nuget.exe install .eT\eT\code\Trading\packages.config
+Nuget.exe install .eT\eT\code\Modules\packages.config
+Nuget.exe install .eT\eT\code\DataGridWithColumnStyle\packages.config
+Nuget.exe install .eT\eT\code\p1\packages.config
 #Start-Sleep -s 600

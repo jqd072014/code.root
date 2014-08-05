@@ -1,5 +1,5 @@
-Nuget.exe install .eT\eT\code\Shell\Shell\packages.config
-Nuget.exe install .eT\eT\code\Shell\Trading\packages.config
-Nuget.exe install .eT\eT\code\Shell\Modules\packages.config
-Nuget.exe install .eT\eT\code\Shell\DataGridWithColumnStyle\packages.config
-Nuget.exe install .eT\eT\code\Shell\p1\packages.config
+Nuget.exe install .eT\eT\code\Shell\packages.config
+Nuget.exe install .eT\eT\code\Trading\packages.config
+Nuget.exe install .eT\eT\code\Modules\packages.config
+Nuget.exe install .eT\eT\code\DataGridWithColumnStyle\packages.config
+Nuget.exe install .eT\eT\code\p1\packages.config

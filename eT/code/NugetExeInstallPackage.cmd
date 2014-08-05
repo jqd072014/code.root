@@ -1,4 +1,4 @@
-nuget.config
+nuget.exe config
 Nuget.exe install .eT\eT\code\Shell\packages.config
 Nuget.exe install .eT\eT\code\Trading\packages.config
 Nuget.exe install .eT\eT\code\Modules\packages.config

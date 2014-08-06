@@ -37,4 +37,23 @@ regedit search "VSPackage1"
 DTE ==Development Tool Extensibility
 Deployment = .vsix file auto generated under debug/release directory 
 (Select Edition in manifest file must include Ultimate, Professional  ...)
+
+Resharper:
+==========
+Ctl+T   Ctl+Shif+T  Shft+Alt+T
+
+Clt+, ctl+Shit,
+Alt+Enter Quick Fix
+Ctl+shit+R refactorinng on file or on class
+
+F12 -- Nav
+
+select code Ctl+E+U
+Alt+Ins
+Ctl+Shit+BkSp
+
+Dependency Injection:  Select code new myclass(), Ctrl+Shit+R Introduce Parameter inside Ctor will put class on Ctor,
+                       then Ctrl_Shit+R again Use base class when possible will change to interface.
+
+
    

@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataGridWithColumnStyle", "DataGridWithColumnStyle\DataGridWithColumnStyle.csproj", "{03A23786-210C-4621-8135-021D7B0838FE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZZMultiVersionPrismTryOut", "p1\ZZMultiVersionPrismTryOut.csproj", "{B76DE847-5821-4161-BD05-61B1D1CB9F9F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shell", "Shell\Shell.csproj", "{E6598FDD-D75B-4B74-96B9-2DEDE509F18A}"
@@ -16,6 +14,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		JIRA.txt = JIRA.txt
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismCustomRegionAdapter", "PrismCustomRegionAdapter\PrismCustomRegionAdapter.csproj", "{92788C3D-CAE9-40F6-BB70-F726C391863B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataGridWithColumnStyle", "DataGridWithColumnStyle\DataGridWithColumnStyle.csproj", "{03A23786-210C-4621-8135-021D7B0838FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,17 +28,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{03A23786-210C-4621-8135-021D7B0838FE}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{03A23786-210C-4621-8135-021D7B0838FE}.Debug|Any CPU.Build.0 = Debug|x86
-		{03A23786-210C-4621-8135-021D7B0838FE}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{03A23786-210C-4621-8135-021D7B0838FE}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{03A23786-210C-4621-8135-021D7B0838FE}.Debug|x86.ActiveCfg = Debug|x86
-		{03A23786-210C-4621-8135-021D7B0838FE}.Debug|x86.Build.0 = Debug|x86
-		{03A23786-210C-4621-8135-021D7B0838FE}.Release|Any CPU.ActiveCfg = Release|x86
-		{03A23786-210C-4621-8135-021D7B0838FE}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{03A23786-210C-4621-8135-021D7B0838FE}.Release|Mixed Platforms.Build.0 = Release|x86
-		{03A23786-210C-4621-8135-021D7B0838FE}.Release|x86.ActiveCfg = Release|x86
-		{03A23786-210C-4621-8135-021D7B0838FE}.Release|x86.Build.0 = Release|x86
 		{B76DE847-5821-4161-BD05-61B1D1CB9F9F}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{B76DE847-5821-4161-BD05-61B1D1CB9F9F}.Debug|Any CPU.Build.0 = Debug|x86
 		{B76DE847-5821-4161-BD05-61B1D1CB9F9F}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
@@ -80,6 +71,26 @@ Global
 		{2262A0E6-AD66-40AE-A11F-C41343CFDAAC}.Release|Mixed Platforms.Build.0 = Release|x86
 		{2262A0E6-AD66-40AE-A11F-C41343CFDAAC}.Release|x86.ActiveCfg = Release|x86
 		{2262A0E6-AD66-40AE-A11F-C41343CFDAAC}.Release|x86.Build.0 = Release|x86
+		{92788C3D-CAE9-40F6-BB70-F726C391863B}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{92788C3D-CAE9-40F6-BB70-F726C391863B}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{92788C3D-CAE9-40F6-BB70-F726C391863B}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{92788C3D-CAE9-40F6-BB70-F726C391863B}.Debug|x86.ActiveCfg = Debug|x86
+		{92788C3D-CAE9-40F6-BB70-F726C391863B}.Debug|x86.Build.0 = Debug|x86
+		{92788C3D-CAE9-40F6-BB70-F726C391863B}.Release|Any CPU.ActiveCfg = Release|x86
+		{92788C3D-CAE9-40F6-BB70-F726C391863B}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{92788C3D-CAE9-40F6-BB70-F726C391863B}.Release|Mixed Platforms.Build.0 = Release|x86
+		{92788C3D-CAE9-40F6-BB70-F726C391863B}.Release|x86.ActiveCfg = Release|x86
+		{92788C3D-CAE9-40F6-BB70-F726C391863B}.Release|x86.Build.0 = Release|x86
+		{03A23786-210C-4621-8135-021D7B0838FE}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{03A23786-210C-4621-8135-021D7B0838FE}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{03A23786-210C-4621-8135-021D7B0838FE}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{03A23786-210C-4621-8135-021D7B0838FE}.Debug|x86.ActiveCfg = Debug|x86
+		{03A23786-210C-4621-8135-021D7B0838FE}.Debug|x86.Build.0 = Debug|x86
+		{03A23786-210C-4621-8135-021D7B0838FE}.Release|Any CPU.ActiveCfg = Release|x86
+		{03A23786-210C-4621-8135-021D7B0838FE}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{03A23786-210C-4621-8135-021D7B0838FE}.Release|Mixed Platforms.Build.0 = Release|x86
+		{03A23786-210C-4621-8135-021D7B0838FE}.Release|x86.ActiveCfg = Release|x86
+		{03A23786-210C-4621-8135-021D7B0838FE}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

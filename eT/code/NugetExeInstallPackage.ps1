@@ -1,3 +1,4 @@
+# this is for use in Team City
 #nuget.exe config
 Nuget.exe install .eT\eT\code\Shell\packages.config -OutputDirectory .eT\eT\code\packages
 Nuget.exe install .eT\eT\code\Trading\packages.config -OutputDirectory .eT\eT\code\packages

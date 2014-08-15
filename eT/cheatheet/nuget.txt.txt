@@ -15,4 +15,8 @@ install-package Rx-main -projectName Modules
 
 Temcity need to run Nuget.exe to update packages
 Nuget CommandLine Bootstrapper---https://nuget.codeplex.com/releases/view/58939
-Nuget.exe install .eT\eT\code\Shell\packages.config -OutputDirectory .eT\eT\code\packages
+Nuget.exe install .eT\eT\code\Shell\packages.config -OutputDirectory .eT\eT\code\package
+
+Nuget 2.7+ has "Enable Nugest Restore" on right click Ctx menu on
+solution properties, build .nuget directory to run NugetCommandLine
+Nuget.exe (Different than the other nuget.ext). This restore ..\packages directory

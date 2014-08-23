@@ -20,3 +20,5 @@ Nuget.exe install .eT\eT\code\Shell\packages.config -OutputDirectory .eT\eT\code
 Nuget 2.7+ has "Enable Nugest Restore" on right click Ctx menu on
 solution properties, build .nuget directory to run NugetCommandLine
 Nuget.exe (Different than the other nuget.ext). This restore ..\packages directory
+
+Nuget Package Explorer---http://npe.codeplex.com/

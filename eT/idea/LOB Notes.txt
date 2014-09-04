@@ -1,0 +1,3 @@
+IMM Swap
+=========
+expiration dates follow international money market futures,IMM futures options. reset periods = IMM Eurodollar futures delivery yield curve  derived from Eurodollar futures prices one to five year fixed leg  settled annual payment, Floating leg three-month LIBOR.

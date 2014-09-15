@@ -1,3 +1,16 @@
 IMM Swap
 =========
-expiration dates follow international money market futures,IMM futures options. reset periods = IMM Eurodollar futures delivery yield curve  derived from Eurodollar futures prices one to five year fixed leg  settled annual payment, Floating leg three-month LIBOR.
+expiration dates follow international money market futures,IMM futures options. 
+reset periods = IMM Eurodollar futures delivery yield curve  derived from Eurodollar 
+futures prices one to five year fixed leg  settled annual payment, Floating leg three-month LIBOR.
+
+TED= Spread btw 3m UST and 3m EuroDollar Future Contract, Identical Expiration= Credit Rating of Corp Borrower
+
+OTR Limited Supply => High Price lower yield
+Yield Curve built by OffTR
+
+Trading:
+7Y SWAP SB vs 3M [IMM]
+USD Roll 7Y SB [Curr]
+Mid Fee 2.5M Up front fee Per 100MM
+(Security Based, Curve, rate based, single index, Loan)

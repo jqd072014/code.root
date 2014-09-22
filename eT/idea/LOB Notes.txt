@@ -14,3 +14,7 @@ Trading:
 USD Roll 7Y SB [Curr]
 Mid Fee 2.5M Up front fee Per 100MM
 (Security Based, Curve, rate based, single index, Loan)
+
+MAC Roll --- Market Aggreed Coupon Swap, IMM vs. 0.25 Increment
+ Receive 771.1M USD Mac Roll IMM1 IMM2 5Y CME [Curve]
+  Pay USD Mac 2.25 IMM1 5Y CME

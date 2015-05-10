@@ -9,6 +9,7 @@ using System.Windows.Interactivity;
 
 namespace VertocalDepth
 {
+    //test watching bld 15
     public class VDBehavior :Behavior<DataGrid>
     {
         public static readonly DependencyProperty SelectingItemProperty = DependencyProperty.RegisterAttached(

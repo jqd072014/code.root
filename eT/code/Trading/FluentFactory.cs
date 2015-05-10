@@ -13,6 +13,7 @@ namespace Trading
 {
     public class FluentFactory
     {
+       // test
         public FluentFactory ViewModelController(Func<IViewModelController> viewModelControllerFactory)
         {
             var f = viewModelControllerFactory.Invoke();

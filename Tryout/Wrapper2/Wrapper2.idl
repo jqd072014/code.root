@@ -1,0 +1,46 @@
+// Wrapper2.idl : IDL source for Wrapper2
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (Wrapper2.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(8A5CBF5E-C7D3-4AA4-B724-DCF4439639DF),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IKeypad : IDispatch{
+	[id(1)] HRESULT Open_USB();
+};
+[
+	uuid(2C3E28BB-718F-4969-A266-BC1A54241ACF),
+	version(1.0),
+]
+library Wrapper2Lib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(1144B1B7-19DD-448C-897C-C4E435BAB0B8)		
+	]
+	dispinterface _IKeypadEvents
+	{
+		properties:
+		methods:
+			[id(1)] HRESULT Callback(int data);
+	};
+	[
+		uuid(1866ECBB-A2D7-4043-9DD6-ECDB5C998494)		
+	]
+	coclass Keypad
+	{
+		[default] interface IKeypad;
+		[default, source] dispinterface _IKeypadEvents;
+	};
+};
+
+import "shobjidl.idl";

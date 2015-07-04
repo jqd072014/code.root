@@ -1,0 +1,59 @@
+Visualizer:
+===========
+VS 2013 buid-in: DataSetVisualizer, WpfVisualizer
+Expression Tree Visualizer:
+Source: http://exprtreevisualizer.codeplex.com/ 
+replace reference C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\ReferenceAssemblies\v2.0\Microsoft.VisualStudio.DebuggerVisualizers.dll
+Build in 2013 copy dll to document/vs2013/visualizer
+
+VS 2008 has a more detail visualizer but would not work in VS2010/2013
+source: Visual Studio sample, Search "Expression Tree Visualizer Sample"
+
+
+Configuration Manager
+=====================
+msbuild eT2010.sln /p:Configuration=JPMConfig /p:Platform="x64"
+Solution active Config JPMConfig and Active Platform x64, will set project level config to  JPMConfig|x64
+Can still do some project level twick.
+Some combination of Platform may be fail, e.g Solution x86/Project row=x86, while project properties platform= X64.
+Could be just directories test/x64 /x86 not line up correctly but not really sure
+
+Tortoise push using saved uid/password:
+======================================
+c:\Users\jimmy\_netrc
+machine github.com
+login jqd072014
+password ********
+
+VSPackage
+==========
+Tools=>Extension Manager=> search "VSPackage", nothing but tell you to donwload
+Download VS2010 SP1 SDK. after install "Add-In project template is removed" (Deprecated)
+need to Downlaod VSPackage Builder to simplify e.g adding Combo to Toolbar
+
+Clean up VSPackage
+C:\Users\Jimmy\AppData\Local\Microsoft\VisualStudio\10.0Exp\Extensions\Company
+regedit search "VSPackage1"
+DTE ==Development Tool Extensibility
+Deployment = .vsix file auto generated under debug/release directory 
+(Select Edition in manifest file must include Ultimate, Professional  ...)
+
+Resharper:
+==========
+Ctl+T   Ctl+Shif+T  Shft+Alt+T
+
+Clt+, ctl+Shit,
+Alt+Enter Quick Fix
+Ctl+shit+R refactorinng on file or on class
+
+F12 -- Nav
+
+select code Ctl+E+U
+Alt+Ins
+Ctl+Shit+BkSp
+
+Dependency Injection:  Select code new myclass(), Ctrl+Shit+R Introduce Parameter inside Ctor will put class on Ctor,
+                       then Ctrl_Shit+R again Use base class when possible will change to interface.
+
+
+   

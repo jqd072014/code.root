@@ -1,0 +1,26 @@
+git init code.root.git
+ls -Force
+tree .\code.root.git\.git
+git status
+git add myfile.txt
+git config --global user.email "dingjb.yahoo.com"
+git config --global user.name "dingjb"
+git commit -m "1st commit"
+git push -u origin jqd072014  after commit push to server
+
+git remote add origin https://github.com/jqd072014/code.root.git
+git push -u origin master
+
+after fork anugular.js.git under my Id.
+git clone https://github.com/jqd072014/angular.js.git
+
+git branch -a
+
+git branch jqd072014
+git checkout jqd072014
+
+git push -u origin jqd072014
+git checkout master
+git checkout jqd072014  
+
+https://code.google.com/p/tortoisegit/wiki/Download

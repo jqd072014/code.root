@@ -1,0 +1,13 @@
+﻿<Window x:Class="PrismCustomRegionAdapter.Shell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         xmlns:cal="http://www.codeplex.com/CompositeWPF"
+        xmlns:def="clr-namespace:PrismCustomRegionAdapter"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid Background="#FF22B1A6">
+        <!--<ContentControl cal:RegionManager.RegionName="{x:Static def:RegionNames.PricingGridRegion}"/>-->
+        <!--<ItemsControl cal:RegionManager.RegionName="{x:Static def:RegionNames.PricingGridRegion}"/>-->
+
+        <StackPanel cal:RegionManager.RegionName="{x:Static def:RegionNames.PricingGridRegion}" Orientation="Horizontal" FlowDirection="RightToLeft" />
+    </Grid>
+</Window>

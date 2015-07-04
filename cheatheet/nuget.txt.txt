@@ -1,0 +1,24 @@
+ install-package Prism -version 4.0.0 -projectname p1
+ install-package Prism -version 4.1.0 -projectname p2
+ install-package Prism -version 4.0.0 
+
+code\nuget.config  <add key="repositorypath" value="Packages" />
+
+// Unity Container Install separate from Prism as UnityExtensions
+Install-Package Prism.UnityExtensions -Version 4.0.0 -projectname DataGridWithColumnStyle
+
+Install-Package AvalonDock -Version 2.0.2000 -projectName Shell
+
+
+
+install-package Rx-main -projectName Modules
+
+Temcity need to run Nuget.exe to update packages
+Nuget CommandLine Bootstrapper---https://nuget.codeplex.com/releases/view/58939
+Nuget.exe install .eT\eT\code\Shell\packages.config -OutputDirectory .eT\eT\code\package
+
+Nuget 2.7+ has "Enable Nugest Restore" on right click Ctx menu on
+solution properties, build .nuget directory to run NugetCommandLine
+Nuget.exe (Different than the other nuget.ext). This restore ..\packages directory
+
+Nuget Package Explorer---http://npe.codeplex.com/

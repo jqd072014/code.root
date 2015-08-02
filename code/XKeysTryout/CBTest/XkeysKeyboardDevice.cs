@@ -35,6 +35,10 @@ namespace CBTest
 
         #endregion
 
+        public XkeysKeyboardDevice()
+        {
+            LoadLightingKeys();
+        }
 
         #region Open/Close Device
 
@@ -64,17 +68,26 @@ namespace CBTest
 
         public void TryClose()
         {
-            if(_device==null)
+            try
             {
-                Status = XkeysKeyboardDeviceStatus.HardwareNotFound;
-                return;
+
+
+                if (_device == null)
+                {
+                    Status = XkeysKeyboardDeviceStatus.HardwareNotFound;
+                    return;
+                }
+                _device.CloseInterface();
+                _disposables.Dispose(); // stop Ensure if Close or it will reset to open
+                Status = XkeysKeyboardDeviceStatus.Closed;
+                if (DeviceClosed != null)
+                {
+                    DeviceClosed();
+                }
             }
-            _device.CloseInterface();
-            _disposables.Dispose(); // stop Ensure if Close or it will reset to open
-            Status = XkeysKeyboardDeviceStatus.Closed;
-            if(DeviceClosed!=null)
+            catch (Exception)
             {
-                DeviceClosed();
+
             }
         }
 
@@ -154,14 +167,28 @@ namespace CBTest
 
         #region callback hooks
 
+
         public void HandlePIEHidData(byte[] data, PIEDevice sourceDevice, int error)
         {
-            if (Status != XkeysKeyboardDeviceStatus.Opened)
+            try
             {
-                return;  // just to make sure Data only go through when both hardware/software are in good condition.
-            }
-            Debug.WriteLine("JQD Handle Data" + GetKeyCode(data));
 
+                if (Status != XkeysKeyboardDeviceStatus.Opened)
+                {
+                    return;  // just to make sure Data only go through when both hardware/software are in good condition.
+                }
+
+                var kc = GetKeyCode(data);
+                //Debug.WriteLine("JQD Handle Data" + kc);
+                var ki = GetKeyIndex(data);
+                if (controlAndPassiveLightingKeys.Keys.Contains(ki))
+                {
+                    TurnOnOrOffControlAndPassiveLights(ki);
+                }
+            }
+            catch (Exception)
+            {
+            }
         }
 
         public void HandlePIEHidError(PIEDevice sourceDevices, int error)
@@ -202,6 +229,25 @@ namespace CBTest
             }
             return (keyInt+1).ToString();
 
+        }
+
+        // XK 80/128 Key Index as defined in Data Input report is the tranport of KeyCode. i.e it counts follow column down
+        public string GetKeyIndex(byte[] inputData)
+        {
+            var keyData = inputData.Take(GetBitToTake()).Skip(3);
+            if (keyData.All(b => b == 0)) return "[NoIndex]";
+
+            int i = 0;
+            int keyInt = 0;
+            foreach (var b in keyData)
+            {
+                if (b != 0)
+                {
+                    keyInt = i*8 + (int)Math.Log(b,2);
+                }
+                i++;
+            }
+            return (keyInt).ToString();
         }
 
         #region Row Offset and Bit to take
@@ -278,10 +324,24 @@ namespace CBTest
 
         public void Dispose()
         {
-            _disposables.Dispose();
-            TryClose();
-            _device = null;
-            Status = XkeysKeyboardDeviceStatus.Closed;
+
+            try
+            {
+                turnOffAll();
+                TryClose();
+                Status = XkeysKeyboardDeviceStatus.Closed;
+                
+                _disposables.Dispose();
+                
+                _device = null;
+            }
+            catch (Exception)
+            {
+
+            }
+
+
+            
         }
 
         #endregion
@@ -303,10 +363,138 @@ namespace CBTest
 
         #endregion
 
-        void WriteReadCustomData()
+        #region turn on off lights
+
+        List<string> onKeyIndexes = new List<string>();
+        List<string> offKeyIndexes = new List<string>();
+
+        Dictionary<string, List<string>> controlAndPassiveLightingKeys = new Dictionary<string, List<string>>();
+             
+        void LoadLightingKeys()
         {
-            
+            controlAndPassiveLightingKeys.Add(TranslateKeyCodeToKeyIndex("3"), PassiveLightingKey());
+            controlAndPassiveLightingKeys.Add(TranslateKeyCodeToKeyIndex("4"), PassiveLightingKey());
+            controlAndPassiveLightingKeys.Add(TranslateKeyCodeToKeyIndex("5"), PassiveLightingKey());
+            controlAndPassiveLightingKeys.Add(TranslateKeyCodeToKeyIndex("6"), PassiveLightingKey());
+            controlAndPassiveLightingKeys.Add(TranslateKeyCodeToKeyIndex("7"), PassiveLightingKey());
+            controlAndPassiveLightingKeys.Add(TranslateKeyCodeToKeyIndex("8"), PassiveLightingKey());
         }
+
+        List<string> PassiveLightingKey()
+        {
+            return new List<string>() { 
+                TranslateKeyCodeToKeyIndex( "12"), 
+                TranslateKeyCodeToKeyIndex( "13"), 
+                TranslateKeyCodeToKeyIndex( "17"), 
+                TranslateKeyCodeToKeyIndex( "18"), 
+            };
+        }
+
+        string TranslateKeyCodeToKeyIndex(string kc)
+        {
+            int i = int.Parse(kc);
+            int col = i % 10;
+            int row = (i - col) / 10+1;
+
+            int idx = (col-1) * 8 + row-1;
+            return idx.ToString();
+        }
+
+        bool IsKeyLightOn(string keyIndex)
+        {
+            if (onKeyIndexes.Contains(keyIndex)) return true;
+            if (offKeyIndexes.Contains(keyIndex)) return false;
+            return false;
+        }
+        //Byte 1    Byte 2      Byte 3      Byte 4       Bytes 5-36 
+//      Constant    Command     Key Index   State         Constant 
+//          0          181          Index   State           0 
+        void turnOn(string keyCode)
+        {
+            if (keyCode=="[KeyUp]") return;
+            byte[] wData = null;
+            wData = new byte[_device.WriteLength];
+            for (int j = 0; j < _device.WriteLength - 1; j++) //don't clear out last byte, the LED byte
+            {
+                wData[j] = 0;
+            }
+            wData[0] = 0;
+            wData[1] = 181;
+            wData[2] = byte.Parse(keyCode);
+            wData[3] = 1;
+            int result = _device.WriteData(wData);
+        }
+
+        void turnOff(string keyCode)
+        {
+            if (keyCode == "[KeyUp]") return;
+            byte[] wData = null;
+            wData = new byte[_device.WriteLength];
+            for (int j = 0; j < _device.WriteLength - 1; j++) //don't clear out last byte, the LED byte
+            {
+                wData[j] = 0;
+            }
+            wData[0] = 0;
+            wData[1] = 181;
+            wData[2] = byte.Parse(keyCode);
+            wData[3] = 0;
+            int result = _device.WriteData(wData);
+        }
+
+        private void turnOffAll()
+        {
+              for(int i=0;i<80;i++)
+              {
+                  turnOff(i.ToString());
+                  onKeyIndexes.Clear();
+              }
+        }
+
+        private void TurnOnOrOffControlAndPassiveLights(string ki)
+        {
+            foreach (var k in controlAndPassiveLightingKeys)
+            {
+                if (k.Key != ki)
+                {
+                    turnOff(k.Key);
+                    offKeyIndexes.Add(k.Key);
+                    onKeyIndexes.Remove(k.Key);
+                    TurnOffPassiveLights(k.Key);
+                }
+            }
+            if (IsKeyLightOn(ki))
+            {
+                turnOff(ki);
+                offKeyIndexes.Add(ki);
+                onKeyIndexes.Remove(ki);
+
+            }
+            else
+            {
+                turnOn(ki);
+                onKeyIndexes.Add(ki);
+                offKeyIndexes.Remove(ki);
+                TurnOnPassiveLights(ki);
+            }
+        }
+
+        void TurnOnPassiveLights(string ki)
+        {
+            foreach (var k in controlAndPassiveLightingKeys[ki])
+            {
+                turnOn(k);
+            }
+        }
+
+        void TurnOffPassiveLights(string ki)
+        {
+            foreach (var k in controlAndPassiveLightingKeys[ki])
+            {
+                turnOff(k);
+            }
+        }
+
+        #endregion
     }
 
     #region Enum Def

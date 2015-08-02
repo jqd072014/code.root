@@ -33,12 +33,18 @@ namespace CBTest
 
         public event DeviceClosedDelegate DeviceClosed;
 
+        bool _ntAccountLocked;
+
         #endregion
 
         public XkeysKeyboardDevice()
         {
             LoadLightingKeys();
+            Microsoft.Win32.SystemEvents.SessionSwitch += SystemEvents_SessionSwitch;
+
         }
+
+
 
         #region Open/Close Device
 
@@ -172,7 +178,11 @@ namespace CBTest
         {
             try
             {
-
+                if (_ntAccountLocked)
+                {
+                    MessageBox.Show("locl");
+                    return;
+                }
                 if (Status != XkeysKeyboardDeviceStatus.Opened)
                 {
                     return;  // just to make sure Data only go through when both hardware/software are in good condition.
@@ -181,9 +191,14 @@ namespace CBTest
                 var kc = GetKeyCode(data);
                 //Debug.WriteLine("JQD Handle Data" + kc);
                 var ki = GetKeyIndex(data);
-                if (controlAndPassiveLightingKeys.Keys.Contains(ki))
+                if (_instrumentXAndActionXLightingKeys.Keys.Contains(ki))
                 {
                     TurnOnOrOffControlAndPassiveLights(ki);
+                }
+
+                if(_productSwitchLightKeys.Contains(ki))
+                {
+                    TurnOnOrOffNonControlLight(ki);
                 }
             }
             catch (Exception)
@@ -324,7 +339,6 @@ namespace CBTest
 
         public void Dispose()
         {
-
             try
             {
                 turnOffAll();
@@ -339,9 +353,6 @@ namespace CBTest
             {
 
             }
-
-
-            
         }
 
         #endregion
@@ -368,16 +379,19 @@ namespace CBTest
         List<string> onKeyIndexes = new List<string>();
         List<string> offKeyIndexes = new List<string>();
 
-        Dictionary<string, List<string>> controlAndPassiveLightingKeys = new Dictionary<string, List<string>>();
-             
+        Dictionary<string, List<string>> _instrumentXAndActionXLightingKeys = new Dictionary<string, List<string>>();
+        List<string> _productSwitchLightKeys = new List<string>();
+     
         void LoadLightingKeys()
         {
-            controlAndPassiveLightingKeys.Add(TranslateKeyCodeToKeyIndex("3"), PassiveLightingKey());
-            controlAndPassiveLightingKeys.Add(TranslateKeyCodeToKeyIndex("4"), PassiveLightingKey());
-            controlAndPassiveLightingKeys.Add(TranslateKeyCodeToKeyIndex("5"), PassiveLightingKey());
-            controlAndPassiveLightingKeys.Add(TranslateKeyCodeToKeyIndex("6"), PassiveLightingKey());
-            controlAndPassiveLightingKeys.Add(TranslateKeyCodeToKeyIndex("7"), PassiveLightingKey());
-            controlAndPassiveLightingKeys.Add(TranslateKeyCodeToKeyIndex("8"), PassiveLightingKey());
+            _instrumentXAndActionXLightingKeys.Add(TranslateKeyCodeToKeyIndex("3"), PassiveLightingKey());
+            _instrumentXAndActionXLightingKeys.Add(TranslateKeyCodeToKeyIndex("4"), PassiveLightingKey());
+            _instrumentXAndActionXLightingKeys.Add(TranslateKeyCodeToKeyIndex("5"), PassiveLightingKey());
+            _instrumentXAndActionXLightingKeys.Add(TranslateKeyCodeToKeyIndex("6"), PassiveLightingKey());
+            _instrumentXAndActionXLightingKeys.Add(TranslateKeyCodeToKeyIndex("7"), PassiveLightingKey());
+            _instrumentXAndActionXLightingKeys.Add(TranslateKeyCodeToKeyIndex("8"), PassiveLightingKey());
+
+            _productSwitchLightKeys.Add(TranslateKeyCodeToKeyIndex("1"));
         }
 
         List<string> PassiveLightingKey()
@@ -452,7 +466,7 @@ namespace CBTest
 
         private void TurnOnOrOffControlAndPassiveLights(string ki)
         {
-            foreach (var k in controlAndPassiveLightingKeys)
+            foreach (var k in _instrumentXAndActionXLightingKeys)
             {
                 if (k.Key != ki)
                 {
@@ -478,9 +492,25 @@ namespace CBTest
             }
         }
 
+        private void TurnOnOrOffNonControlLight(string ki)
+        {
+            if (IsKeyLightOn(ki))
+            {
+                turnOff(ki);
+                offKeyIndexes.Add(ki);
+                onKeyIndexes.Remove(ki);
+            }
+            else
+            {
+                turnOn(ki);
+                onKeyIndexes.Add(ki);
+                offKeyIndexes.Remove(ki);
+            }
+        }
+
         void TurnOnPassiveLights(string ki)
         {
-            foreach (var k in controlAndPassiveLightingKeys[ki])
+            foreach (var k in _instrumentXAndActionXLightingKeys[ki])
             {
                 turnOn(k);
             }
@@ -488,9 +518,36 @@ namespace CBTest
 
         void TurnOffPassiveLights(string ki)
         {
-            foreach (var k in controlAndPassiveLightingKeys[ki])
+            foreach (var k in _instrumentXAndActionXLightingKeys[ki])
             {
                 turnOff(k);
+            }
+        }
+
+        #endregion
+
+        #region NT Account Lock
+
+        void SystemEvents_SessionSwitch(object sender, Microsoft.Win32.SessionSwitchEventArgs e)
+        {
+            if (e.Reason == Microsoft.Win32.SessionSwitchReason.SessionLock)
+            {
+                _ntAccountLocked = true;
+            }
+            else if (e.Reason == Microsoft.Win32.SessionSwitchReason.SessionUnlock)
+            {
+                _ntAccountLocked = false;
+                ClearBuffer();
+            }
+        }
+
+        private void ClearBuffer()
+        {
+            byte[] inputData = null;
+            int i = _device.BlockingReadData(ref inputData, 1000);
+            while (i == 0)
+            {
+                i = _device.BlockingReadData(ref inputData, 1000);
             }
         }
 

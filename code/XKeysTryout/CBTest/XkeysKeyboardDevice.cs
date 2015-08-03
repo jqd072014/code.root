@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace CBTest
 {
@@ -44,7 +45,7 @@ namespace CBTest
 
         }
 
-
+        public Light w { get;set;}
 
         #region Open/Close Device
 
@@ -176,8 +177,12 @@ namespace CBTest
 
         public void HandlePIEHidData(byte[] data, PIEDevice sourceDevice, int error)
         {
+            
             try
             {
+                w.OnTop();
+
+               
                 if (_ntAccountLocked)
                 {
                     MessageBox.Show("locl");
@@ -201,7 +206,7 @@ namespace CBTest
                     TurnOnOrOffNonControlLight(ki);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
             }
         }

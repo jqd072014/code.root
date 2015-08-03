@@ -27,6 +27,23 @@ namespace CBTest
             _device = new XkeysKeyboardDevice();
             _device.TryOpen(SupportedXkeysKeyboardDevice.XK80);
             this.Closing += Light_Closed;
+            _device.w = this;
+
+        }
+
+        public void OnTop()
+        {
+            
+
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                if (IsActive) return;
+                var orig = WindowState;
+                WindowState = WindowState.Minimized;
+
+                WindowState = orig;
+
+            }));
 
         }
 
